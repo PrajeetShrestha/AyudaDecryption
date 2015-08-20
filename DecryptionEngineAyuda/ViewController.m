@@ -41,7 +41,7 @@
 }
 
 - (NSArray *)breakKeys {
-    NSString *string = @"6B68696E6F6C6D62636061666764657A7B78797E7F7C7D7273704B48494E4F4C4D42434041464744455A5B58595E5F5C5D525350544A0B1B6A1809190E1E0F1F741C0C1D00120213031A75070117517157775610110D160614041505";
+    NSString *string = @"6B68696E6F6C6D62636061666764657A7B78797E7F7C7D7273704B48494E4F4C4D42434041464744455A5B58595E5F5C5D525350544A0B1B6A1809190E1E0F1F741C0C1D00120213031A75070117517157775610110D160614041505C7C1";
     NSInteger lengthOfString = string.length;
     NSMutableArray *splittedKeys = [NSMutableArray new];
     for (int i = 0; i < lengthOfString; i += 2) {
@@ -52,7 +52,7 @@
 }
 
 - (NSArray*)breakValues {
-    NSString *string = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~`!1@2#3$4%5^6&7*8(9)0_-+={[}]|:;'<,>.?/";
+    NSString *string = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~`!1@2#3$4%5^6&7*8(9)0_-+={[}]|:;'<,>.?/íë";
     NSInteger lengthOfString = string.length;
     NSMutableArray *splittedValues = [NSMutableArray new];
     for (int i = 0; i < lengthOfString; i ++) {
@@ -69,6 +69,10 @@
     NSMutableArray *splittedCharacters = [NSMutableArray new];
     for (int i = 0; i < lengthOfString; i += 2) {
         NSString *subString = [string substringWithRange:NSMakeRange(i,2)];
+        if ([subString isEqualToString:@"27"]) {
+            subString = [string substringWithRange:NSMakeRange(i,4)];
+            i = i + 2;
+        }
         [splittedCharacters addObject:subString];
     }
     NSLog(@"Printing Decrypted Message");
@@ -81,7 +85,7 @@
         }
         //NSLog(@"%@",self.keys[key]);
     }
-    NSLog(@"Mutated String: \n %@",mutatedString);
+    NSLog(@"Mutated String: \n%@",mutatedString);
 }
 
 @end
